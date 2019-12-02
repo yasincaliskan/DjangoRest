@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, UpdateAPIView, RetrieveAPIView
 from comment.api.permissions import IsOwner
 from comment.api.serializers import CommentCreateSerializer, CommentListSerializer, CommentDeleteUpdateSerializer
 from comment.models import Comment
@@ -28,7 +28,7 @@ class CommentDeleteAPIView(DestroyAPIView):
     lookup_field = 'pk'
     permission_classes = [IsOwner]
 
-class CommentUpdateAPIView(UpdateAPIView):
+class CommentUpdateAPIView(UpdateAPIView, RetrieveAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentDeleteUpdateSerializer
     lookup_field = 'pk'
