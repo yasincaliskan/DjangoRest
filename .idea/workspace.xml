@@ -21,8 +21,14 @@
   <component name="ProjectId" id="1UDXJUZn3d9MsMdaJGS2zIYrcDJ" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/twitter_api" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Yasko\Desktop\django-rest\blog\post\api" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -102,6 +108,9 @@
       <workItem from="1574892071271" duration="14000" />
       <workItem from="1574892086270" duration="2700000" />
       <workItem from="1574930394193" duration="1929000" />
+      <workItem from="1575062976422" duration="14578000" />
+      <workItem from="1575213160114" duration="5992000" />
+      <workItem from="1575234557015" duration="7000" />
     </task>
     <servers />
   </component>

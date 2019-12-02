@@ -1,19 +1,26 @@
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import (ListAPIView,
                                      RetrieveAPIView,
                                      DestroyAPIView,
                                      CreateAPIView,
                                      RetrieveUpdateAPIView)
 
+from post.api.paginations import PostPagination
 from post.api.permissions import IsOwner
 from post.api.serializers import PostSerializer, PostUpdateCreateSerializer
 from post.models import Post
-from rest_framework.permissions import (IsAuthenticated,
-                                        IsAdminUser)
+from rest_framework.permissions import (IsAuthenticated,)
 
 
 class PostListAPIView(ListAPIView):
-    queryset = Post.objects.all()
     serializer_class = PostSerializer
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ["title", "content"]
+    pagination_class = PostPagination
+
+    def get_queryset(self):
+        queryset = Post.objects.filter(draft=False)
+        return queryset
 
 class PostDetailAPIView(RetrieveAPIView):
     queryset = Post.objects.all()
