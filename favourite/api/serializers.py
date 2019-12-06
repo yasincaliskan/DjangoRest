@@ -12,3 +12,8 @@ class FavouriteListCreateAPISerializer(ModelSerializer):
         if queryset.exists():
             raise serializers.ValidationError("Its already added favourite list!")
         return attrs
+
+class FavouriteAPISerializer(ModelSerializer):
+    class Meta:
+        model = Favourite
+        fields = ['content']

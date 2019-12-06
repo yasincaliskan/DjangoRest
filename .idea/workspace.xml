@@ -21,12 +21,13 @@
   <component name="ProjectId" id="1UDXJUZn3d9MsMdaJGS2zIYrcDJ" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/favourite" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/favourite/api" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Yasko\Desktop\django-rest\blog\favourite\api" />
       <recent name="C:\Users\Yasko\Desktop\django-rest\blog\favourite" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -116,7 +117,7 @@
       <workItem from="1575234557015" duration="7000" />
       <workItem from="1575294975223" duration="5681000" />
       <workItem from="1575470797174" duration="3273000" />
-      <workItem from="1575634550576" duration="3052000" />
+      <workItem from="1575634550576" duration="4259000" />
     </task>
     <servers />
   </component>
