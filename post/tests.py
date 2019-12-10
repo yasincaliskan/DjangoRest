@@ -5,7 +5,7 @@ from rest_framework.utils import json
 from post.models import Post
 
 
-class FavouriteCreateList(APITestCase):
+class PostCreateList(APITestCase):
     url_create = reverse("post:create")
     url_list = reverse("post:list")
     url_login = reverse("token_obtain_pair")
@@ -47,3 +47,56 @@ class FavouriteCreateList(APITestCase):
         response = self.client.get(self.url_list)
         self.assertTrue(len(json.loads(response.content)["results"]) == Post.objects.all().count())
 
+class PostUpdateDelete(APITestCase):
+    login_url = reverse("token_obtain_pair")
+
+    def setUp(self):
+        self.username = "yaskotest"
+        self.password = "test1234"
+        self.user = User.objects.create_user(username=self.username, password=self.password)
+        self.user2 = User.objects.create_user(username="test2", password=self.password)
+        self.post = Post.objects.create(title="Header", content="Content-xxx")
+        self.url = reverse("post:update", kwargs={"slug": self.post.slug})
+        self.test_jwt_authentication()
+
+    def test_jwt_authentication(self, username="yaskotest", password="test1234"):
+        response = self.client.post(self.login_url, data={'username': username, 'password': password})
+        self.assertEqual(200, response.status_code)
+        self.assertTrue("access" in json.loads(response.content))
+        self.token = response.data["access"]
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.token)
+
+    #Delete post
+    def test_post_delete(self):
+        response = self.client.delete(self.url)
+        self.assertEqual(204, response.status_code)
+
+    #Delete post from other user
+    def test_post_delete_other_user(self):
+        self.test_jwt_authentication("test2")
+        response = self.client.delete(self.url)
+        self.assertEqual(403, response.status_code)
+
+    def test_post_update(self):
+        data = {
+            "content" : "xxx",
+            "title": "header"
+        }
+        response = self.client.put(self.url, data)
+        self.assertEqual(200, response.status_code)
+        self.assertTrue(Post.objects.get(id = self.post.id).content == data["content"])
+
+    def test_post_update_other_user(self):
+        self.test_jwt_authentication("test2")
+        data = {
+            "content" : "xxx",
+            "title": "header"
+        }
+        response = self.client.put(self.url, data)
+        self.assertEqual(403, response.status_code)
+        self.assertFalse(Post.objects.get(id = self.post.id).content == data["content"])
+
+    def test_unauthorization(self):
+        self.client.credentials()
+        response = self.client.get(self.url)
+        self.assertEqual(403, response.status_code)
